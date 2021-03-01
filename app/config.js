@@ -4,3 +4,5 @@ const config = {
     port: process.env.PORT || 5500,
   },
 };
+
+module.exports = config;
