@@ -1,7 +1,7 @@
 const express = require("express");
 
 const config = require("./config");
-// const loader = require('');
+const loader = require("./loader");
 
 function bootstraping() {
   const app = express();
@@ -12,12 +12,19 @@ function bootstraping() {
     console.info(
       `Server is running on http://${config.server.host}:${config.server.port}`
     );
-    // loader(app);
+    loader(app);
   });
 }
 
 function onError() {
-  console.log("Error");
+  if (serverError.code === "EACCES") {
+    console.error(`${config.server.port} requires elevated privileges`);
+  } else if (serverError.code === "EADDRINUSE") {
+    console.error(`${config.server.port} already in use`);
+  } else {
+    console.error(serverError);
+  }
+  process.exit(1);
 }
 
 bootstraping();
