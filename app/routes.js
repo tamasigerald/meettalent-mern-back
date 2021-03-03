@@ -19,4 +19,6 @@ router
   .get(candidatesController.listCandidates)
   .post(candidatesController.createCandidate);
 
+// router.route("/candidates/:filter").get(candidatesController.filterCandidates);
+
 module.exports = router;

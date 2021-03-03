@@ -33,7 +33,20 @@ async function createCandidate(req, res) {
   }
 }
 
+// async function filterCandidates(req, res) {
+//   try {
+//     const word = req.params.filter;
+//     console.log(word);
+//     const query = { name: /Ala/ };
+//     const result = await Candidate.find(query);
+//     res.json({ results: result });
+//   } catch (err) {
+//     res.json({ error: "Error al consultar la base de datos" });
+//   }
+// }
+
 module.exports = {
   listCandidates,
   createCandidate,
+  //   filterCandidates,
 };
