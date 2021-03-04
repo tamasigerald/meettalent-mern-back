@@ -32,7 +32,7 @@ function getUser(userId) {
  */
 
 function getUserByEmail(userEmail) {
-    return User.findById({
+    return User.find({
         email: userEmail
     });
 

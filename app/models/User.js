@@ -19,13 +19,17 @@ const userSchema = new mongoose.Schema(
 
 //coge contraseña en texto plano y guarda encriptada
 userSchema.pre('save', async function(next) {
-    try {
-        this.password = await bcrypt.hash(this.password, config.server.bcryptRounds);
-        next();
-    }
-    catch(err) {
-        next(err);
-    }
+   if (this.password) {
+       this.password = bcrypt.hashSync(this.password, config.server.bcryptRounds);
+   }
+   next();
+});
+
+//compara  y devuelve verdadero o falso
+userSchema.method({
+    checkPassword: function (plaintextPassword) {
+        return bcrypt.compareSync(plaintextPassword, this.password);
+    },
 });
 
 

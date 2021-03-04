@@ -1,7 +1,7 @@
 const crudUser = require('../business/crudUser');
 
 function createUser(req, res, next) {
-    crudUser.createUser(req.body.username, req.body.email, req.body.password).then(function () {
+    crudUser.createUser(req.body.email, req.body.password).then(function (user) {
         res.status(201).json({
             error: false,
             created: user
