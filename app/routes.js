@@ -2,41 +2,37 @@ const express = require("express");
 
 const offerController = require("./controllers/offerController");
 const userController = require('./controllers/userController');
+const authController = require('./controllers/authControllers');
 
-const User = require('./models/User');
-const bcrypt = require('bcrypt');
+
 
 const router = express.Router();
 
-// ---------- LOGIN ROUTES ----------
+
+
+
+
+// ---------- REGISTER ROUTE ----------
+router.route('/register')
+    .post(authController.register, authController.getToken); 
+
+
+
+// ---------- LOGIN ROUTE ----------
 
 router.route('/login')
-    .post(async function(req, res, next) {
-      try{
-        const foundUser = await User.findOne({email: req.body.email});
-        if (foundUser === null) {
-          res.status(200).json({ error: 'User not found' });
-        }
-        else if (await bcrypt.compare(req.body.password, foundUser.password)) {
-          res.status(200).json({ error: false, logged: foundUser });
-        }
-        else {
-          res.status(200).json({ error: 'Password incorrect' });
-        }
-      }
-      catch(err) {
-        next(err);
-      }
-    });
+    .post(authController.login, authController.getToken); // si el login ha ido correctamente te da opcion a coger el token
 
 
 // ---------- USER ROUTES ----------
 
 router.route('/user')
+    .all(authController.verifyToken) // si el usuario no esta autorizado no pasara a la siguiente ruta
     .post(userController.createUser)
     .get(userController.listUsers);
 
 router.route('/user/:id')
+    .all(authController.verifyToken)// si el usuario no esta autorizado no pasara a la siguiente ruta
     .get(userController.getUser)
     .put(userController.overwriteUser)
     .patch(userController.modifyUser)
