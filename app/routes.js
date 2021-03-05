@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 
 const offerController = require("./controllers/offerController");
 const userController = require('./controllers/userController');
@@ -14,7 +15,7 @@ const router = express.Router();
 
 // ---------- REGISTER ROUTE ----------
 router.route('/register')
-    .post(authController.register, authController.getToken); 
+    .post(passport.authenticate('register-local', { session: false }), authController.getToken); 
 
 
 
