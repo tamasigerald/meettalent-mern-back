@@ -11,18 +11,19 @@ const router = express.Router();
 
 
 
+// ---------- LOGIN ROUTE ----------
+
+router.route('/login')
+    .post(passport.authenticate('login-local', { session: false }), authController.getToken); // si el login ha ido correctamente te da opcion a coger el token
 
 
 // ---------- REGISTER ROUTE ----------
 router.route('/register')
-    .post(passport.authenticate('register-local', { session: false }), authController.getToken); 
+    .post(passport.authenticate('register-local', { session: false }), authController.getToken);
 
 
 
-// ---------- LOGIN ROUTE ----------
 
-router.route('/login')
-    .post(authController.login, authController.getToken); // si el login ha ido correctamente te da opcion a coger el token
 
 
 // ---------- USER ROUTES ----------
@@ -42,8 +43,8 @@ router.route('/user/:id')
 // ---------- OFFER ROUTES ----------
 
 router
-  .route("/offers")
-  .get(offerController.listOffers)
-  .post(offerController.createOffer);
+    .route("/offers")
+    .get(offerController.listOffers)
+    .post(offerController.createOffer);
 
 module.exports = router;

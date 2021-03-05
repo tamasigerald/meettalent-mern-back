@@ -1,45 +1,8 @@
 const jwt = require("jsonwebtoken");
-const crudUser = require("../business/crudUser");
 const config = require("../config");
 
-function login(req, res, next) {
-    //console.log(req.body.email);
-    crudUser
-        .getUserByEmail(req.body.email)
-        .then(function (userFound) {
-            if (userFound) {
-                if (userFound.checkPassword(req.body.password)) {
-                    return next();
-                } else {
-                    res.status(200).json({
-                        error: true,
-                        logged: false,
-                        message: "Incorrect password",
-                    });
-                }
-            } else {
-                res.status(200).json({
-                    error: true,
-                    logged: false,
-                    message: "User not found",
-                });
-            }
-        })
-        .catch(function (err) {
-            next(err);
-        });
-}
 
-function register(req, res, next) {
-    crudUser
-        .createUser(req.body.email, req.body.password)
-        .then(function (newUser) {
-            next();
-        })
-        .catch(function (err) {
-            next(err);
-        });
-}
+
 
 function getToken(req, res, next) {
     try {
@@ -77,8 +40,6 @@ function verifyToken(req, res, next) {
 }
 
 module.exports = {
-    register,
-    login,
     getToken,
     verifyToken,
 };
