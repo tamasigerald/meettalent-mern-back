@@ -3,7 +3,7 @@ const crudUser = require("../business/crudUser");
 const config = require("../config");
 
 function login(req, res, next) {
-    console.log(req.body.email);
+    //console.log(req.body.email);
     crudUser
         .getUserByEmail(req.body.email)
         .then(function (userFound) {
@@ -41,13 +41,13 @@ function register(req, res, next) {
         });
 }
 
-function getToken(req, res) {
+function getToken(req, res, next) {
     try {
         const token = jwt.sign(
             req.body, // Desde el cliente nos tienen que pasar un json con email y password
             config.server.secret,
             {
-                expiresIn: config.server.jwt.expiresIn,
+                expiresIn: config.server.jwtExpiration,
             }
         );
         res.status(200).json({
