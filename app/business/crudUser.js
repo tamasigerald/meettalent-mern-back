@@ -6,13 +6,24 @@ const User = require('../models/User');
  * @returns {Promise}
  */
 
-function createUser(email, password) {
+function createUser(email, password, social) {
     const user = new User({
         email,
-        password
+        password,
+        social
     });
     return user.save();
 }
+
+/**
+ * @param {String} userEmail
+ * @param {Promise}  
+ */
+
+function getUserBySocialId(socialId) {
+    return User.findOne({ social: socialId });
+}
+
 
 
 /**
@@ -90,6 +101,7 @@ module.exports = {
     listUsers,
     getUser,
     getUserByEmail,
+    getUserBySocialId,
     overwriteUser,
     modifyUser,
     deleteUser,
