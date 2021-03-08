@@ -4,8 +4,7 @@ const passport = require('passport');
 const offerController = require("./controllers/offerController");
 const userController = require('./controllers/userController');
 const authController = require('./controllers/authControllers');
-
-
+const candidatesController = require("./controllers/candidateController");
 
 const router = express.Router();
 
@@ -22,10 +21,6 @@ router.route('/register')
     .post(passport.authenticate('register-local', { session: false }), authController.getToken);
 
 
-
-
-
-
 // ---------- USER ROUTES ----------
 
 router.route('/user')
@@ -40,11 +35,23 @@ router.route('/user/:id')
     .patch(userController.modifyUser)
     .delete(userController.deleteUser);
 
+
 // ---------- OFFER ROUTES ----------
+
 
 router
     .route("/offers")
     .get(offerController.listOffers)
     .post(offerController.createOffer);
+
+
+// ---------- CANDIDATES ROUTES ----------
+
+router
+  .route("/candidates")
+  .get(candidatesController.listCandidates)
+  .post(candidatesController.createCandidate);
+
+// router.route("/candidates/:filter").get(candidatesController.filterCandidates);
 
 module.exports = router;
