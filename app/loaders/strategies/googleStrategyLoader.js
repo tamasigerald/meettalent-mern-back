@@ -6,7 +6,7 @@ const config = require('../../config');
 const registerStrategy = new GoogleStrategy(
     {
         clientID: config.passport.google.clientID,
-        clienteSecret: config.passport.google.clienteSecret,
+        clientSecret: config.passport.google.clienteSecret,
         callbackURL: config.passport.google.registerCallbackURL,
 
     },
@@ -28,7 +28,7 @@ const registerStrategy = new GoogleStrategy(
 const loginStrategy = new GoogleStrategy(
     {
         clientID: config.passport.google.clientID,
-        clienteSecret: config.passport.google.clienteSecret,
+        clientSecret: config.passport.google.clienteSecret,
         callbackURL: config.passport.google.registerCallbackURL,
     },
     async function (accessToken, refreshToken, profile, done) {
