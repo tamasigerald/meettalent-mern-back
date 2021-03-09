@@ -12,16 +12,11 @@ function getToken(req, res, next) {
                 expiresIn: config.server.jwtExpiration,
             }
         );
-        crudUser.getUserByEmail(req.body.email)
-        .then(function(userFound) {
-            const {_id} = userFound;
-            res.status(200).json({
-                error: false,
-                token,
-                _id
-            })
+        res.status(200).json({
+            error: false,
+            token,
+            user: req.userID
         })
-
     } catch (err) {
         next(err);
     }

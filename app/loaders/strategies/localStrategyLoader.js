@@ -30,6 +30,7 @@ const loginStrategy = new LocalStrategy(
             .then(function (userFound) {
                 if (userFound) {
                     if (userFound.checkPassword(req.body.password)) {
+                        req.userID = userFound._id;
                         return done(null, userFound);
                     }
                     else {
