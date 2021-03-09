@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+
 const config = require('../config');
 
 const userSchema = new mongoose.Schema(
@@ -10,6 +11,9 @@ const userSchema = new mongoose.Schema(
         password: {
             type: String,
         },
+        social: {
+            type: String,
+        }
     },
     {
         timestamps: true,
@@ -17,15 +21,15 @@ const userSchema = new mongoose.Schema(
 );
 
 
-//coge contraseña en texto plano y guarda encriptada
-userSchema.pre('save', async function(next) {
-   if (this.password) {
-       this.password = bcrypt.hashSync(this.password, config.server.bcryptRounds);
-   }
-   next();
+//collects the password in plain text and converts it encrypted
+userSchema.pre('save', async function (next) {
+    if (this.password) {
+        this.password = bcrypt.hashSync(this.password, config.server.bcryptRounds);
+    }
+    next();
 });
 
-//compara  y devuelve verdadero o falso
+//Compare and return true or false
 userSchema.method({
     checkPassword: function (plaintextPassword) {
         return bcrypt.compareSync(plaintextPassword, this.password);
@@ -36,4 +40,4 @@ userSchema.method({
 
 const User = mongoose.model('User', userSchema);
 
-module.exports= User;
+module.exports = User;

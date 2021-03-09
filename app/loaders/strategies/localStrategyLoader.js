@@ -1,4 +1,5 @@
 const LocalStrategy = require("passport-local").Strategy;
+
 const crudUser = require("../../business/crudUser");
 
 const registerStrategy = new LocalStrategy(
