@@ -6,7 +6,7 @@ const config = require("../config");
 function getToken(req, res, next) {
     try {
         const token = jwt.sign(
-            req.body, // Desde el cliente nos tienen que pasar un json con email y password
+            req.body,
             config.server.secret,
             {
                 expiresIn: config.server.jwtExpiration,

@@ -13,7 +13,18 @@ const userSchema = new mongoose.Schema(
         },
         social: {
             type: String,
+        },
+        nif: {
+            type: String,
+        },
+        name: {
+            type: String,
+        },
+        avatar: {
+            type: String
         }
+
+
     },
     {
         timestamps: true,

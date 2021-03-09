@@ -3,14 +3,19 @@ const User = require('../models/User');
 /**
  * @param {string} email 
  * @param {string} password 
+ * @param {string} nif
+ * @param {string} name
  * @returns {Promise}
  */
 
-function createUser(email, password, social) {
+function createUser(email, password, social, nif, name) {
     const user = new User({
         email,
         password,
-        social
+        social,
+        name,
+        nif,
+
     });
     return user.save();
 }

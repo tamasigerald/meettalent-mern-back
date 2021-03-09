@@ -39,13 +39,13 @@ router.route('/register/google/cb')
 router.route('/user')
     .all(authController.verifyToken) // if the user is not authorized it will not go to the next route
     .post(userController.createUser)
-    .get(userController.listUsers);
+//.get(userController.listUsers);
 
 router.route('/user/:id')
     .all(authController.verifyToken)// if the user is not authorized it will not go to the next route
     .get(userController.getUser)
     .put(userController.overwriteUser)
-    .patch(userController.modifyUser)
+    //.patch(userController.modifyUser)
     .delete(userController.deleteUser);
 
 // ---------- OFFER ROUTES ----------
