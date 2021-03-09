@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const crudUser = require("../business/crudUser");
 
 const config = require("../config");
 
@@ -11,10 +12,16 @@ function getToken(req, res, next) {
                 expiresIn: config.server.jwtExpiration,
             }
         );
-        res.status(200).json({
-            error: false,
-            token,
-        });
+        crudUser.getUserByEmail(req.body.email)
+        .then(function(userFound) {
+            const {_id} = userFound;
+            res.status(200).json({
+                error: false,
+                token,
+                _id
+            })
+        })
+
     } catch (err) {
         next(err);
     }
