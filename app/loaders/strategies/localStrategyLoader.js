@@ -9,7 +9,7 @@ const registerStrategy = new LocalStrategy(
     },
     function (req, email, password, done) {
         crudUser
-            .createUser(req.body.email, req.body.password)
+            .createUser(req.body.email, req.body.password, req.body.social, req.body.nif, req.body.name)
             .then(function (newUser) {
                 done(null, newUser);
             })
