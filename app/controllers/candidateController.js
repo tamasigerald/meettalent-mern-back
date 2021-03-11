@@ -33,6 +33,17 @@ async function createCandidate(req, res) {
   }
 }
 
+async function showCandidate(req, res){
+  try{
+      const candidateFound = await Candidate.findById(req.params.id);
+      res.json({results:candidateFound});
+
+  }
+  catch(err){
+    res.json({error:'Error al consultar la DB!'})
+  }
+}
+
 // async function filterCandidates(req, res) {
 //   try {
 //     const word = req.params.filter;
@@ -48,5 +59,6 @@ async function createCandidate(req, res) {
 module.exports = {
   listCandidates,
   createCandidate,
+  showCandidate,
   //   filterCandidates,
 };

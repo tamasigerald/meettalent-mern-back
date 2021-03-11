@@ -6,7 +6,10 @@ const loader = require("./loader");
 
 function bootstraping() {
   const app = express();
-  app.use(cors());
+  app.use(cors({
+    origin:"http://localhost:3000",
+    credentials: true,
+  }));
   const server = app.listen(config.server.port);
 
   server.on("error", onError);

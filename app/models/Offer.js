@@ -14,6 +14,10 @@ const offerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    language: {
+      type: String,
+      required: true,
+    },
     country: {
       type: String,
       required: true,
@@ -43,11 +47,13 @@ const offerSchema = new mongoose.Schema(
     ],
     status: {
       type: Boolean,
-      required: true,
+      required: true
+     
     },
     sector: String,
     educationRequired: String,
     description: String,
+    candidateRequirements: String,
     availabilityRequired: String,
     salary: String,
     workingDay: String,
