@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema(
         },
         social: {
             type: String,
-            required: true,
         },
         nif: {
             type: String,
