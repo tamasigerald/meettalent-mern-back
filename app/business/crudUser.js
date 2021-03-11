@@ -5,16 +5,18 @@ const User = require('../models/User');
  * @param {string} password 
  * @param {string} nif
  * @param {string} name
+ * @param {string} avatar
  * @returns {Promise}
  */
 
-function createUser(email, password, social, nif, name) {
+function createUser(email, password, social, nif, name, avatar) {
     const user = new User({
         email,
         password,
         social,
         name,
         nif,
+        avatar
 
     });
     return user.save();
