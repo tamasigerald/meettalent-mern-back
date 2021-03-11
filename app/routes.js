@@ -54,7 +54,11 @@ router
     .route("/offers")
     .get(offerController.listOffers)
     .post(offerController.createOffer);
-
+    
+router
+    .route("/offers/status")
+    .put(offerController.editOfferStatus);
+    
 
 // ---------- CANDIDATES ROUTES ----------
 

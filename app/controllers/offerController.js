@@ -1,3 +1,4 @@
+const { ConnectionStates } = require("mongoose");
 const Offer = require("../models/Offer");
 
 async function listOffers(req, res) {
@@ -6,6 +7,17 @@ async function listOffers(req, res) {
     res.json({ results: offersList });
   } catch (err) {
     res.json({ error: "Error al consultar la base de datos" });
+  }
+}
+
+async function editOfferStatus(req, res) {
+  try {
+    const offer = await Offer.findById(req.body._id);
+    offer.status = req.body.status;
+    await offer.save();
+    res.json({message: 'Updated!'});
+  } catch (error) {
+    res.json({error: error});
   }
 }
 
@@ -44,4 +56,5 @@ async function createOffer(req, res) {
 module.exports = {
   listOffers,
   createOffer,
+  editOfferStatus
 };
