@@ -17,6 +17,7 @@ async function createOffer(req, res) {
     newOffer.releaseDate = new Date();
     newOffer.title = req.body.title;
     newOffer.location = req.body.location;
+    newOffer.language = req.body.language;
     newOffer.country = req.body.country;
     newOffer.vacancyNum = req.body.vacancyNum;
     // newOffer.registered = req.body.registered;
@@ -29,6 +30,7 @@ async function createOffer(req, res) {
     newOffer.sector = req.body.sector;
     newOffer.educationRequired = req.body.educationRequired;
     newOffer.description = req.body.description;
+    newOffer.candidateRequirements = req.body.candidateRequirements;
     newOffer.availabilityRequired = req.body.availabilityRequired;
     newOffer.salary = req.body.salary;
     newOffer.workingDay = req.body.workingDay;

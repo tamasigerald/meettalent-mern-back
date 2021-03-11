@@ -64,6 +64,9 @@ router
     .post(candidatesController.createCandidate);
 
 
+
+router.route("/candidates/:id") 
+    .get(candidatesController.showCandidate)
 // router.route("/candidates/:filter").get(candidatesController.filterCandidates);
 
 module.exports = router;
