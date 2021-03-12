@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Candidate = require("./Candidate");
 
 const offerSchema = new mongoose.Schema(
   {
@@ -31,6 +32,7 @@ const offerSchema = new mongoose.Schema(
     inProcess: [
       {
         type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Candidate'
       },
     ],
     finalists: [
@@ -43,6 +45,7 @@ const offerSchema = new mongoose.Schema(
     candidates: [
       {
         type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Candidate'
       },
     ],
     status: {

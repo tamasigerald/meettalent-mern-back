@@ -10,6 +10,16 @@ async function listOffers(req, res) {
   }
 }
 
+async function getOffer(req, res) {
+  try {
+    const offer = await Offer.findById(req.params.id)
+    .populate('candidates').exec();
+    res.json({ results: offer });
+  } catch (err) {
+    res.json({ error: "Error al consultar la base de datos" });
+  }
+}
+
 async function editOfferStatus(req, res) {
   try {
     const offer = await Offer.findById(req.body._id);
@@ -58,5 +68,6 @@ async function createOffer(req, res) {
 module.exports = {
   listOffers,
   createOffer,
-  editOfferStatus
+  editOfferStatus,
+  getOffer
 };
