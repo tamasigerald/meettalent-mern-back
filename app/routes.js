@@ -60,8 +60,11 @@ router
     .put(offerController.editOfferStatus);
     
 router
-    .route("/offers/:id")
+    .route("/offers/:id/")
     .get(offerController.getOffer)
+
+router
+    .route("/offers/:id/:candidate")
     .put(offerController.editOfferInProcess);
 
 
