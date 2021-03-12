@@ -13,7 +13,7 @@ async function listOffers(req, res) {
 async function getOffer(req, res) {
   try {
     const offer = await Offer.findById(req.params.id)
-    .populate('candidates').exec();
+    .populate(['candidates', 'inProcess']).exec();
     res.json({ results: offer });
   } catch (err) {
     res.json({ error: "Error al consultar la base de datos" });
@@ -24,6 +24,28 @@ async function editOfferStatus(req, res) {
   try {
     const offer = await Offer.findById(req.body._id);
     offer.status = req.body.status;
+    await offer.save();
+    res.json({message: 'Updated!'});
+  } catch (error) {
+    res.json({error: error});
+  }
+}
+
+async function editOfferCandidates(req, res) {
+  try {
+    const offer = await Offer.findById(req.body._id);
+    offer.candidates = req.body.candidates;
+    await offer.save();
+    res.json({message: 'Updated!'});
+  } catch (error) {
+    res.json({error: error});
+  }
+}
+
+async function editOfferInProcess(req, res) {
+  try {
+    const offer = await Offer.findById(req.body._id);
+    offer.inProcess = req.body.inProcess;
     await offer.save();
     res.json({message: 'Updated!'});
   } catch (error) {
@@ -69,5 +91,7 @@ module.exports = {
   listOffers,
   createOffer,
   editOfferStatus,
-  getOffer
+  getOffer,
+  editOfferCandidates,
+  editOfferInProcess
 };

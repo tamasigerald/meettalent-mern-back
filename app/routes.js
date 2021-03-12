@@ -61,7 +61,9 @@ router
     
 router
     .route("/offers/:id")
-    .get(offerController.getOffer);
+    .get(offerController.getOffer)
+    .put(offerController.editOfferInProcess);
+
 
 // ---------- CANDIDATES ROUTES ----------
 
